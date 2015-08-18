@@ -26,3 +26,9 @@
 *.exe
 *.out
 *.app
+
+
+# Game 2048
+bin/
+build/
+./gm2048
