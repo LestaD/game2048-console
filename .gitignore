@@ -31,4 +31,4 @@
 # Game 2048
 bin/
 build/
-./gm2048
+gm2048
