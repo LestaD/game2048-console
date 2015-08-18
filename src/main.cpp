@@ -7,9 +7,34 @@
 //
 
 #include <iostream>
+#include <sys/ioctl.h>
+#include <unistd.h>
+#include <cstdio>
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
-    return 0;
+#include "game/game.h"
+#include "render/engine.h"
+
+
+int main(int argc, const char * argv[])
+{
+  struct winsize win;
+  ioctl(STDOUT_FILENO, TIOCGWINSZ, &win);
+
+  printf("lines %d, columns %d\n", win.ws_row, win.ws_col);
+
+  Render::Engine *render = new Render::Engine(win.ws_row, win.ws_col);
+  Game::IGame *game = new Game::G2048(render);
+
+  game->openMenu();
+  int ch = '0';
+  for (;;)
+  {
+    ch = std::getchar();
+    game->sendKey(ch);
+    game->tick();
+    if (ch == 'q') break;
+  }
+  game->closeGame();
+  game->destroyAll();
+  return 0;
 }
