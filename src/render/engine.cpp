@@ -1,12 +1,12 @@
-#include "engine.h"
 #include <iostream>
+#include "engine.h"
 
 namespace Render
 {
 
 
-Engine::Engine(int lines, int columns) :
-  win_width(columns), win_height(lines)
+Engine::Engine(int lines, int columns)
+          : win_width(columns), win_height(lines)
 {
   std::system("stty raw");
   screen = new char[win_width * win_height];
@@ -36,6 +36,23 @@ void Engine::emptyScreen()
 void Engine::destroy()
 {
   delete this;
+}
+
+void Engine::writeCenterLine(const char * text)
+{
+  std::cout << "\r";
+  unsigned len = strlen(text);
+  unsigned startFrom = getWidth() / 2 - len / 2;
+  for (unsigned s = 0; s < startFrom; s++)
+  {
+    std::cout << " ";
+  }
+  std::cout << text;
+  for (unsigned s = 0; s < startFrom; s++)
+  {
+    std::cout << " ";
+  }
+  std::cout << "\r\n";
 }
 
 

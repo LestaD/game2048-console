@@ -1,6 +1,8 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
+#include "screen.h"
+
 namespace Render
 {
 
@@ -18,10 +20,13 @@ public:
 
   void destroy();
 
+  void writeCenterLine(const char * text);
+
 private:
   int win_width;
   int win_height;
   char * screen;
+
 };
 
 }

@@ -1,5 +1,6 @@
 #include "game.h"
 #include <iostream>
+#include "logic.h"
 
 namespace Game
 {
@@ -32,6 +33,7 @@ void G2048::endSession()
 void G2048::openMenu()
 {
   changeState(GAME_MENU);
+  m_Render->writeCenterLine("Hello player");
 }
 
 void G2048::closeGame()
