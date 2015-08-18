@@ -36,19 +36,21 @@ void G2048::openMenu()
 
 void G2048::closeGame()
 {
+  if (m_State == GAME_END || m_State == GAME_EXIT) return;
   endSession();
   changeState(GAME_EXIT);
 }
 
 void G2048::destroy()
 {
+  closeGame();
   delete this;
 }
 
 void G2048::destroyAll()
 {
   m_Render->destroy();
-  delete this;
+  destroy();
 }
 
 void G2048::sendKey(int key)
